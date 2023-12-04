@@ -1,0 +1,8 @@
+﻿  Building Custom Rule D:/Ddir/gitcode/arkarrot/cocos2d/external/poly2tri/CMakeLists.txt
+  shapes.cc
+  sweep.cc
+  sweep_context.cc
+  cdt.cc
+  advancing_front.cc
+  正在生成代码...
+  ext_poly2tri.vcxproj -> D:\Ddir\gitcode\arkarrot\build.win32\lib\Debug\ext_poly2tri.lib
