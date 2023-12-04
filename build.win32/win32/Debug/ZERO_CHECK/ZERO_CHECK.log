@@ -1,1 +1,25 @@
 ﻿  1>Checking Build System
+  CMake is re-running because D:/Ddir/gitcode/arkarrot/build.win32/CMakeFiles/generate.stamp is out-of-date.
+    the file 'D:/Ddir/gitcode/arkarrot/CMakeLists.txt'
+    is newer than 'D:/Ddir/gitcode/arkarrot/build.win32/CMakeFiles/generate.stamp.depend'
+    result='-1'
+  -- Selecting Windows SDK version 10.0.22621.0 to target Windows 10.0.19044.
+  -- PROJECT_NAME:arkarrot
+  -- PROJECT_SOURCE_DIR:D:/Ddir/gitcode/arkarrot
+  -- COCOS2DX_ROOT_PATH:D:/Ddir/gitcode/arkarrot/cocos2d
+  -- CMAKE_MODULE_PATH:D:/Ddir/gitcode/arkarrot/cocos2d/cmake/Modules/
+  -- PROJECT_BINARY_DIR:D:/Ddir/gitcode/arkarrot/build.win32
+  -- ENGINE_BINARY_PATH:D:/Ddir/gitcode/arkarrot/build.win32/engine
+  -- PYTHON_PATH:E:/Anaconda3/envs/python27/python.exe
+  -- COCOS_COMMAND_PATH:D:/Ddir/Codes/cocos2d-x-4.0/tools/cocos2d-console/bin/cocos
+  -- HOST_SYSTEM:Windows
+  -- CMAKE_GENERATOR: Visual Studio 17 2022
+  -- using Windows MSVC generate cocos2d-x project, MSVC_VERSION:1938
+  -- COCOS2DX_LUAJIT_ROOT:D:/Ddir/Codes/cocos2d-x-4.0/tools/cocos2d-console/bin/../plugins/plugin_luacompile/bin
+  -- LUAJIT32_COMMAND:D:/Ddir/Codes/cocos2d-x-4.0/tools/cocos2d-console/plugins/plugin_luacompile/bin/32bit/luajit-win32.exe
+  -- LUAJIT64_COMMAND:D:/Ddir/Codes/cocos2d-x-4.0/tools/cocos2d-console/plugins/plugin_luacompile/bin/64bit/luajit-win32.exe
+  -- cocos_mark_code_files: cocos2d
+  -- cocos_mark_code_files: arkarrot
+  -- Configuring done (0.6s)
+  -- Generating done (3.5s)
+  -- Build files have been written to: D:/Ddir/gitcode/arkarrot/build.win32

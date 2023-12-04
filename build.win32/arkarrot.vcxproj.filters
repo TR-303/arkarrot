@@ -4,7 +4,7 @@
     <ClCompile Include="D:\Ddir\gitcode\arkarrot\Classes\AppDelegate.cpp">
       <Filter>Source Files\Classes</Filter>
     </ClCompile>
-    <ClCompile Include="D:\Ddir\gitcode\arkarrot\Classes\HelloWorldScene.cpp">
+    <ClCompile Include="D:\Ddir\gitcode\arkarrot\Classes\StartMenuScene.cpp">
       <Filter>Source Files\Classes</Filter>
     </ClCompile>
     <ClCompile Include="D:\Ddir\gitcode\arkarrot\proj.win32\main.cpp">
@@ -18,7 +18,7 @@
     <ClInclude Include="D:\Ddir\gitcode\arkarrot\Classes\AppDelegate.h">
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
-    <ClInclude Include="D:\Ddir\gitcode\arkarrot\Classes\HelloWorldScene.h">
+    <ClInclude Include="D:\Ddir\gitcode\arkarrot\Classes\StartMenuScene.h">
       <Filter>Source Files\Classes</Filter>
     </ClInclude>
     <ClInclude Include="D:\Ddir\gitcode\arkarrot\proj.win32\main.h">

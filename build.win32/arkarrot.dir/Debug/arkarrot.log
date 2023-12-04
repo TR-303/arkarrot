@@ -1,8 +1,6 @@
-﻿  Building Custom Rule D:/Ddir/gitcode/arkarrot/CMakeLists.txt
-  AppDelegate.cpp
-  HelloWorldScene.cpp
-  main.cpp
-  precheader.cpp
+﻿  AppDelegate.cpp
+  StartMenuScene.cpp
+  LINK : 没有找到 D:\Ddir\gitcode\arkarrot\build.win32\bin\arkarrot\Debug\arkarrot.exe 或上一个增量链接没有生成它；正在执行完全链接
 libchipmunk.lib(cpArbiter.obj) : warning LNK4099: 未找到 PDB“”(使用“libchipmunk.lib(cpArbiter.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
 libchipmunk.lib(cpBody.obj) : warning LNK4099: 未找到 PDB“”(使用“libchipmunk.lib(cpBody.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样
 libchipmunk.lib(cpShape.obj) : warning LNK4099: 未找到 PDB“”(使用“libchipmunk.lib(cpShape.obj)”或在“”中寻找)；正在链接对象，如同没有调试信息一样

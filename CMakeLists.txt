@@ -44,8 +44,8 @@ if(NOT DEFINED BUILD_ENGINE_DONE) # to test arkarrot into root project
 endif()
 
 # record sources, headers, resources...
-set(GAME_SOURCE)
-set(GAME_HEADER)
+file(GLOB GAME_SOURCE Classes/*.cpp)
+file(GLOB GAME_HEADER Classes/*.h)
 
 set(GAME_RES_FOLDER
     "${CMAKE_CURRENT_SOURCE_DIR}/Resources"
@@ -53,16 +53,6 @@ set(GAME_RES_FOLDER
 if(APPLE OR WINDOWS)
     cocos_mark_multi_resources(common_res_files RES_TO "Resources" FOLDERS ${GAME_RES_FOLDER})
 endif()
-
-# add cross-platforms source files and header files 
-list(APPEND GAME_SOURCE
-     Classes/AppDelegate.cpp
-     Classes/HelloWorldScene.cpp
-     )
-list(APPEND GAME_HEADER
-     Classes/AppDelegate.h
-     Classes/HelloWorldScene.h
-     )
 
 if(ANDROID)
     # change APP_NAME to the share library name for Android, it's value depend on AndroidManifest.xml
