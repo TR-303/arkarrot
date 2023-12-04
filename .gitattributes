@@ -1,0 +1,2 @@
+build.win32/lib/Debug/cocos2d.lib filter=lfs diff=lfs merge=lfs -text
+build.win32/engine/cocos/core/cocos2d.dir/Debug/cocos2d.pch filter=lfs diff=lfs merge=lfs -text
