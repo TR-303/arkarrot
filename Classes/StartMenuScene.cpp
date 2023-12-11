@@ -6,7 +6,6 @@ bool StartMenuScene::init()
 {
 	if (!Scene::init())return false;
 	//add sprites below
-
-
+	
 	return true;
 }
