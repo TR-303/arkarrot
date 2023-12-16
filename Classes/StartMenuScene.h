@@ -5,6 +5,6 @@
 class StartMenuScene :public cocos2d::Scene {
 public:
 	bool init()override;
-
+	void nothing(Ref* sender);//delete it
 	CREATE_FUNC(StartMenuScene);
 };
