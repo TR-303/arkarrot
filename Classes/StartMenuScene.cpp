@@ -2,8 +2,6 @@
 
 USING_NS_CC;
 
-//#define DEBUG
-
 bool StartMenuScene::init()
 {
     Size visibleSize = Director::getInstance()->getVisibleSize();
@@ -43,17 +41,6 @@ bool StartMenuScene::init()
 
     // 添加按钮到场景
     this->addChild(button, 2);
-
-#ifdef DEBUG
-    auto touchListener = EventListenerTouchOneByOne::create();
-    touchListener->onTouchBegan = [](Touch* touch, Event* event) {
-        // your code
-        Vec2 touchLocation = touch->getLocation();
-        CCLOG("点击坐标：X = %.2f, Y = %.2f", touchLocation.x, touchLocation.y);
-        return true;
-    };
-    _eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
-#endif // DEBUG
 
 	return true;
 }
