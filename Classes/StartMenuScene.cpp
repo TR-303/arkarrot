@@ -1,4 +1,5 @@
 #include "StartMenuScene.h"
+#include "CommonDefines.h"
 
 USING_NS_CC;
 
@@ -41,6 +42,8 @@ bool StartMenuScene::init()
 
     // 添加按钮到场景
     this->addChild(button, 2);
+
+    CREATE_POSITION_INDICATOR();
 
 	return true;
 }
