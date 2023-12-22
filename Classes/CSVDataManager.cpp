@@ -1,5 +1,5 @@
+﻿#include "CommonDefines.h"
 #include "CSVDataManager.h"
-#include "CommonDefines.h"
 
 USING_NS_CC;
 
@@ -26,17 +26,19 @@ void CSVDataManager::loadTowerData(const string& path)
 	file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 	while (!file.eof()) {
 		string name, plist_path;
-		int frame_cnt, cost, attack, bullet_frame_cnt;
-		float cool_down, bullet_speed;
+		int frame_cnt, cost, attack, range, bullet_frame_cnt;
+		float cooldown, rotate_speed, bullet_speed;
 		std::getline(file, name, ',');
 		std::getline(file, plist_path, ',');
 		file >> frame_cnt; file.ignore(1, ',');
 		file >> cost; file.ignore(1, ',');
-		file >> cool_down; file.ignore(1, ',');
+		file >> cooldown; file.ignore(1, ',');
 		file >> attack; file.ignore(1, ',');
+		file >> range; file.ignore(1, ',');
+		file >> rotate_speed; file.ignore(1, ',');
 		file >> bullet_frame_cnt; file.ignore(1, ',');
 		file >> bullet_speed; file.ignore(1, '\n');
-		towerInfos[name] = TowerInfo{ name,plist_path,frame_cnt,cost,cool_down,attack,bullet_frame_cnt,bullet_speed };
+		towerInfos[name] = TowerInfo{ name,plist_path,frame_cnt,cost,cooldown,attack,range,rotate_speed,bullet_frame_cnt,bullet_speed };
 		file.peek();
 	}
 	file.close();
@@ -67,4 +69,18 @@ void CSVDataManager::loadMonsterData(const string& path)
 	}
 	file.close();
 	return;
+}
+
+const TowerInfo& CSVDataManager::getTowerInfo(const string& name) {
+	if (towerInfos.count(name) > 0)return towerInfos[name];
+	else {
+		//?
+	}
+}
+
+const MonsterInfo& CSVDataManager::getMonsterInfo(const string& name) {
+	if (monsterInfos.count(name) > 0)return monsterInfos[name];
+	else {
+		//?
+	}
 }

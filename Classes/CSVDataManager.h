@@ -1,54 +1,67 @@
-#pragma once
+ï»¿#pragma once
 #include "CommonDefines.h"
 #include <unordered_set>
 #include <unordered_map>
 #include <fstream>
+#include <filesystem>
+
+struct MonsterInfo {
+	string name;
+	string plist_path;
+	int frame_cnt;
+	float speed;
+	int lifepoint;
+	int damage;
+};
+
+struct TowerInfo {
+	string name;
+	string plist_path;
+	int frame_cnt;
+	int cost;
+	float cooldown;
+	int attack;
+	int range;
+	float rotate_speed;
+
+	int bullet_frame_cnt;
+	float bullet_speed;
+};
 
 class CSVDataManager {
 private:
-	//µ¥ÀıÀàÖ¸Õë
+	//å•ä¾‹ç±»æŒ‡é’ˆ
 	static CSVDataManager* _single_instance;
-	
-	struct MonsterInfo {
-		string name;
-		string plist_path;
-		int frame_cnt;
-		float speed;
-		int lifepoint;
-		int damage;
-	};
-
-	struct TowerInfo {
-		string name;
-		string plist_path;
-		int frame_cnt;
-		int cost;
-		float cooldown;
-		int attack;
-
-		int bullet_frame_cnt;
-		float bullet_speed;
-	};
 
 	std::unordered_set<string> visited_path;
 	std::unordered_map<string, TowerInfo> towerInfos;
 	std::unordered_map<string, MonsterInfo> monsterInfos;
 
-	//Ë½ÓĞ¹¹Ôìº¯Êı£¬²»ÄÜÔÚÍâ²¿´´½¨´ËÀà
+	//ç§æœ‰æ„é€ å‡½æ•°ï¼Œä¸èƒ½åœ¨å¤–éƒ¨åˆ›å»ºæ­¤ç±»
 	CSVDataManager();
 public:
 	/*
-	* @brief »ñÈ¡csvÊı¾İ¼ÓÔØÆ÷µÄµ¥Àı¶ÔÏó
+	* @brief è·å–csvæ•°æ®åŠ è½½å™¨çš„å•ä¾‹å¯¹è±¡
 	*/
 	static CSVDataManager* getInstance();
 	/*
-	* @brief ¼ÓÔØ·ÀÓùËşµÄÊı¾İ
-	* @param towers.csvµÄÂ·¾¶
+	* @brief åŠ è½½é˜²å¾¡å¡”çš„æ•°æ®
+	* @param towers.csvçš„è·¯å¾„
 	*/
 	void loadTowerData(const string& path);
 	/*
-	* @brief ¼ÓÔØ¹ÖÎïµÄÊı¾İ
-	* @param monsters.csvµÄÂ·¾¶
+	* @brief åŠ è½½æ€ªç‰©çš„æ•°æ®
+	* @param monsters.csvçš„è·¯å¾„
 	*/
 	void loadMonsterData(const string& path);
+	/*
+	* @brief è·å¾—æŒ‡å®šå¡”çš„æ•°æ®
+	* @param å¡”çš„åç§°
+	*/
+	const TowerInfo& getTowerInfo(const string& name);
+	/*
+	* @brief è·å¾—æŒ‡å®šæ€ªç‰©çš„æ•°æ®
+	* @param æ€ªç‰©çš„åç§°
+	*/
+	const MonsterInfo& getMonsterInfo(const string& name);
 };
