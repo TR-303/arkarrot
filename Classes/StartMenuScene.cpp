@@ -1,11 +1,14 @@
 #include "StartMenuScene.h"
 #include "CommonDefines.h"
+#include"ChooseMenuScene.h"
 
+#include "ui/CocosGUI.h"
 USING_NS_CC;
 
-void StartMenuScene::nothing(Ref* sender)
-{
-    CCLOG("clicked");
+
+void StartMenuScene::goToChooseMenuScene(cocos2d::Ref* sender) {
+    auto scene = ChooseMenuScene::createScene();
+    cocos2d::Director::getInstance()->replaceScene(cocos2d::TransitionFade::create(0.5, scene));
 }
 
 bool StartMenuScene::init()
@@ -58,7 +61,13 @@ bool StartMenuScene::init()
 
     // 设置按钮回调
     //button->addTouchEventListener(CC_CALLBACK_1(StartMenuScene::nothing, this));
-    button->addClickEventListener(CC_CALLBACK_1(StartMenuScene::nothing, this));
+    //button->addClickEventListener(CC_CALLBACK_1(StartMenuScene::nothing, this));
+    // 
+    // 
+    //auto button = cocos2d::ui::Button::create("Themes/scene/stages_theme1-hd/ss_map01.png");
+    //button->setPosition(cocos2d::Vec2(480, 320));
+    button->addClickEventListener(CC_CALLBACK_1(StartMenuScene::goToChooseMenuScene, this));
+
     // 添加按钮到场景
     this->addChild(button, 2);
 
@@ -66,3 +75,5 @@ bool StartMenuScene::init()
 
 	return true;
 }
+
+
