@@ -1,0 +1,4 @@
+﻿name,plist_path,frame_cnt,speed,lp,damage,reward
+fat_green,Monsters/Monsters.plist,2,100,100,1,100
+fly_blue,Monsters/Monsters.plist,2,150,80,1,100
+land_star,Monsters/Monsters.plist,2,80,150,1,100

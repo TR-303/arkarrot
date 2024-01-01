@@ -1,0 +1,7 @@
+﻿name,plist_path,frame_cnt,cost,sell,cooldown,attack,range,rotate_speed,bullet_frame_cnt,bullet_speed
+Bottle1,Towers/Bottle.plist,3,0,0,0.3,20,150,540,3,1000
+Bottle2,Towers/Bottle.plist,3,0,0,0.2,25,200,540,3,1000
+Bottle3,Towers/Bottle.plist,3,0,0,0.15,30,250,540,3,1000
+Star1,Towers/Star.plist,3,0,0,0.8,10,150,10000,1,700
+Star2,Towers/Star.plist,3,0,0,0.6,12,175,10000,1,700
+Star3,Towers/Star.plist,3,0,0,0.4,15,200,10000,1,700
