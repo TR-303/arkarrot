@@ -1,4 +1,4 @@
-/****************************************************************************
+﻿/****************************************************************************
  Copyright (c) 2017-2018 Xiamen Yaji Software Co., Ltd.
  
  http://www.cocos2d-x.org
@@ -24,6 +24,8 @@
 
 #include "AppDelegate.h"
 #include "StartMenuScene.h"
+#include "TestScene.h"
+#include "CSVDataManager.h"
 
 // #define USE_AUDIO_ENGINE 1
 
@@ -107,8 +109,10 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     register_all_packages();
 
+    CSVDataManager::getInstance()->loadTowerData("D:/Ddir/gitcode/arkarrot/Resources/towers.csv");
+
     // create a scene. it's an autorelease object
-    auto scene = StartMenuScene::create();
+    auto scene = TestScene::create();
 
     // run
     director->runWithScene(scene);

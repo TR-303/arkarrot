@@ -1,11 +1,11 @@
-#pragma once
+ï»¿#pragma once
 #include "cocos2d.h"
 
 #define DEBUG
 
 #ifdef DEBUG
 /*
-* @brief ÔÚ³¡¾°ÖÐÊ¹ÓÃ¸Ãº¯Êý£¬Êó±êµã»÷Ê±ÏÔÊ¾Êó±êÎ»ÖÃ×ø±ê£¬½öÔÚDEBUG¶¨ÒåÊ±ÓÐÐ§
+* @brief åœ¨åœºæ™¯ä¸­ä½¿ç”¨è¯¥å‡½æ•°ï¼Œé¼ æ ‡ç‚¹å‡»æ—¶æ˜¾ç¤ºé¼ æ ‡ä½ç½®åæ ‡ï¼Œä»…åœ¨DEBUGå®šä¹‰æ—¶æœ‰æ•ˆ
 */
 #define CREATE_POSITION_INDICATOR() \
 auto touchListener = EventListenerTouchOneByOne::create();\
@@ -18,17 +18,5 @@ _eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 #else
 #define CREATE_POSITION_INDICATOR() 
 #endif
-
-using cocos2d::Director;
-using cocos2d::Scene;
-using cocos2d::Node;
-using cocos2d::Animation;
-using cocos2d::AnimationFrame;
-using cocos2d::Animate;
-using cocos2d::Sprite;
-using cocos2d::SpriteFrame;
-using cocos2d::SpriteFrameCache;
-using cocos2d::Vector;
-using cocos2d::log;
 
 using std::string;

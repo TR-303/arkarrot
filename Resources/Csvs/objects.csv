@@ -1,0 +1,11 @@
+﻿name,plist_path,lp,sizex,sizey,reward
+cloud01,Objects/objects.plist,1000,1,1,100
+cloud02,Objects/objects.plist,1000,1,1,100
+cloud03,Objects/objects.plist,1000,1,1,100
+cloud04,Objects/objects.plist,2000,2,1,200
+cloud05,Objects/objects.plist,3000,2,2,300
+cloud06,Objects/objects.plist,3000,2,2,300
+cloud07,Objects/objects.plist,3000,2,2,300
+cloud10,Objects/objects.plist,1000,1,1,150
+cloud11,Objects/objects.plist,3000,2,2,500
+cloud12,Objects/objects.plist,1000,1,1,150

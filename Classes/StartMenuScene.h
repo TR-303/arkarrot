@@ -8,6 +8,8 @@ public:
 	bool init()override;
 
 	CREATE_FUNC(StartMenuScene);
+	/*
+	* @brief ��ʼ��ť�ص�����������Ϊ����ѡ�ؽ���
+	*/
 	void StartMenuScene::goToChooseMenuScene(cocos2d::Ref* sender);
-
 };

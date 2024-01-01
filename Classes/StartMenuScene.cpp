@@ -1,6 +1,8 @@
 #include "StartMenuScene.h"
 #include "CommonDefines.h"
 #include"ChooseMenuScene.h"
+#include "ui/CocosGUI.h"
+
 
 #include "ui/CocosGUI.h"
 USING_NS_CC;
@@ -13,16 +15,15 @@ void StartMenuScene::goToChooseMenuScene(cocos2d::Ref* sender) {
 
 bool StartMenuScene::init()
 {
-    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("VisualResources/mainscene1-hd.plist");
-
+    SpriteFrameCache::getInstance()->addSpriteFramesWithFile("Scenes/startmenuscene/startmenuscene.plist");
     Size visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
     Vec2 center = Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2);
 
-	if (!Scene::init())return false;
-	//add sprites below
-    
-    Sprite* health_notice = Sprite::create("VisualResources/health_notice.png");
+    if (!Scene::init())return false;
+
+    Sprite* health_notice = Sprite::create("Scenes/startmenuscene/health_notice.png");
+
     Sprite* background = Sprite::createWithSpriteFrameName("mainbg.png");
     Sprite* title = Sprite::createWithSpriteFrameName("mainbg_CN.png");
     Sprite* carrot = Sprite::createWithSpriteFrameName("carrot.png");
@@ -30,13 +31,17 @@ bool StartMenuScene::init()
     Sprite* leaf2 = Sprite::createWithSpriteFrameName("leaf-2.png");
     Sprite* leaf3 = Sprite::createWithSpriteFrameName("leaf-3.png");
 
-    /*if (background == nullptr || title == nullptr || health_notice == nullptr)return false;*/
+    if (background == nullptr || title == nullptr || health_notice == nullptr) {
+        throw std::exception("");
+        return false;
+    }
 
     Sequence* sequence = Sequence::create(DelayTime::create(2.0f), FadeOut::create(.5f), nullptr);
     health_notice->runAction(sequence);
 
 
-    // ÉèÖÃ¾«ÁéÎ»ÖÃ
+
+    // è®¾ç½®ç²¾çµä½ç½®
     background->setPosition(center);
     title->setPosition(center + Vec2(0, -15));
     health_notice->setPosition(center);
@@ -45,10 +50,11 @@ bool StartMenuScene::init()
     leaf2->setPosition(origin + Vec2(479, 473));
     leaf3->setPosition(origin + Vec2(555, 456));
 
-    // ½«¾«ÁéÌí¼Óµ½³¡¾°ÖÐ
+    // å°†ç²¾çµæ·»åŠ åˆ°åœºæ™¯ä¸­
     this->addChild(health_notice, 110);
     this->addChild(background);
     this->addChild(title, 100);
+
     this->addChild(carrot,90);
     this->addChild(leaf1, 10);
     this->addChild(leaf2, 10);
@@ -59,7 +65,7 @@ bool StartMenuScene::init()
     button->loadTextures("btn_adventure_normal_CN.png", "btn_adventure_pressed_CN.png", "", cocos2d::ui::Widget::TextureResType::PLIST);
     button->setPosition(center + Vec2(0, -230));
 
-    // ÉèÖÃ°´Å¥»Øµ÷
+    // è®¾ç½®æŒ‰é’®å›žè°ƒ
     //button->addTouchEventListener(CC_CALLBACK_1(StartMenuScene::nothing, this));
     //button->addClickEventListener(CC_CALLBACK_1(StartMenuScene::nothing, this));
     // 
@@ -68,12 +74,15 @@ bool StartMenuScene::init()
     //button->setPosition(cocos2d::Vec2(480, 320));
     button->addClickEventListener(CC_CALLBACK_1(StartMenuScene::goToChooseMenuScene, this));
 
-    // Ìí¼Ó°´Å¥µ½³¡¾°
+    // æ·»åŠ æŒ‰é’®åˆ°åœºæ™¯
     this->addChild(button, 2);
 
     CREATE_POSITION_INDICATOR();
 
-	return true;
+    return true;
 }
 
-
+void StartMenuScene::goToChooseMenuScene(cocos2d::Ref* sender) {
+    auto scene = ChooseMenuScene::create();
+    cocos2d::Director::getInstance()->pushScene(cocos2d::TransitionFade::create(0.5, scene));
+}
