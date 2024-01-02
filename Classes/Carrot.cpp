@@ -42,8 +42,8 @@ bool Carrot::runAnimation(Touch* touch, Event* event)
 void Carrot::getHurt(int damage)
 {
     lifepoint -= damage;
-    if (lifepoint <= 0) {
-        //LevelScene::getInstance()->lose();
+    if (lifepoint == 0) {
+        LevelScene::getInstance()->lose();
         return;
     }
     lifeLabel->update(lifepoint);
