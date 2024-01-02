@@ -1,6 +1,7 @@
 #include "LevelScene.h"
 #include "TowerBase.h"
 #include "TowerStar.h"
+#include "TowerShit.h"
 #include "TowerBottle.h"
 #include "ui/UIButton.h"
 #include "VictimBase.h"
@@ -23,7 +24,6 @@ LevelScene* LevelScene::getInstance() {
 	return _single_instance;
 }
 
-
 void LevelScene::onExitTransitionDidStart()
 {
 	Scene::onExitTransitionDidStart();
@@ -37,6 +37,8 @@ bool LevelScene::init(int lvl)
 {
 	if (!_Base::init())return false;
 
+
+	// 建造、升级、移除防御塔所需的所有按钮
 	selectBox = cocos2d::Sprite::create("TowerMenu/select_01.png");
 	buildButtonBottle = cocos2d::ui::Button::create();
 	buildButtonShit = cocos2d::ui::Button::create();
@@ -44,7 +46,7 @@ bool LevelScene::init(int lvl)
 	upgradeButton = cocos2d::ui::Button::create();
 	removeButton = cocos2d::ui::Button::create();
 
-	selectBox->setPosition(Vec2(10000, 10000));
+	selectBox->setPosition(Vec2(10000, 10000)); //不显示的时候给它挪到屏幕外面去
 	buildButtonBottle->setPosition(Vec2(10000, 10000));
 	buildButtonShit->setPosition(Vec2(10000,10000));
 	buildButtonStar->setPosition(Vec2(10000,10000));
@@ -62,8 +64,8 @@ bool LevelScene::init(int lvl)
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	Vec2 center = Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2);
 
+	// 场景信息
 	levelInfo = CSVDataManager::getInstance()->getLevelInfo(lvl);
-
 	regionStates.assign(map_row, std::vector<RegionState>(map_col, EMPTY));
 	towerStates.assign(map_row, std::vector<TowerInfo>(map_col, TowerInfo()));
 	string levelNmae = StringUtils::format("Level_%d", lvl);
@@ -77,7 +79,7 @@ bool LevelScene::init(int lvl)
 	bg_pic->setPosition(center);
 	addChild(bg_pic, -2);
 
-	auto tmxMap = TMXTiledMap::create(levelFolderPath + levelNmae + ".tmx");
+	auto tmxMap = TMXTiledMap::create(levelFolderPath + levelNmae + ".tmx");//地图
 
 	//障碍物
 	auto objects = tmxMap->getObjectGroup("objects");
@@ -155,9 +157,9 @@ bool LevelScene::init(int lvl)
 
 	//金钱
 	money = levelInfo.money;
-	moneyLabel = cocos2d::Label::createWithTTF("money: 0", "numFont/Pacifico-Regular.ttf", 30);
+	moneyLabel = cocos2d::Label::createWithTTF("0", "numFont/Pacifico-Regular.ttf", 30);
 	moneyLabel->setAnchorPoint(cocos2d::Vec2(0, 1));  // 设置锚点为左上角
-	moneyLabel->setPosition(cocos2d::Vec2(10, cocos2d::Director::getInstance()->getVisibleSize().height - 10));
+	moneyLabel->setPosition(cocos2d::Vec2(100, cocos2d::Director::getInstance()->getVisibleSize().height));
 	this->addChild(moneyLabel, 1000);  // 设置显示层级，确保在其他元素上方
 	schedule(CC_SCHEDULE_SELECTOR(LevelScene::updateMoneyLabel), 0.1f);//刷新
 
@@ -172,10 +174,16 @@ bool LevelScene::init(int lvl)
 	//波次显示
 	waveLabel = cocos2d::Label::createWithTTF("wave: 1", "numFont/Pacifico-Regular.ttf", 30);
 	waveLabel->setAnchorPoint(cocos2d::Vec2(0, 1));  // 设置锚点为左上角
-	waveLabel->setPosition(cocos2d::Vec2(300, cocos2d::Director::getInstance()->getVisibleSize().height - 10));
-	this->addChild(waveLabel, 1000);  // 设置显示层级，确保在其他元素上方
+	waveLabel->setPosition(cocos2d::Vec2(400, cocos2d::Director::getInstance()->getVisibleSize().height));
+	this->addChild(waveLabel, 1000);
 	schedule(CC_CALLBACK_1(LevelScene::updateWaveLabel, this), 0.2f, "waveSchedule");//刷新
 
+	//顶栏
+	banner=Sprite::create("LevelSceneButton/banner.png");
+	banner->setPosition(Vec2(visibleSize.width / 2 + origin.x, visibleSize.height - banner->getContentSize().height / 2));
+	addChild(banner, 30);
+	for (int i = 0; i < 12; i++)
+		regionStates[7][i] = UNAVAILABLE;
 
 	//萝卜
 	carrot = Carrot::create();
@@ -188,14 +196,13 @@ bool LevelScene::init(int lvl)
 	_eventDispatcher->addEventListenerWithFixedPriority(touchListener, 10);
 }
 
-
-// 添加 updateMoneyLabel 函数用于更新 Label 的显示
+// 用于更新 Label 的显示
 void LevelScene::updateMoneyLabel(float delta)
 {
 	// 更新Label显示的金币数量
 	if (moneyLabel)
 	{
-		moneyLabel->setString("money: " + std::to_string(money));
+		moneyLabel->setString(std::to_string(money));
 	}
 }
 
@@ -215,7 +222,10 @@ void LevelScene::updateWaveLabel(float delta)
 
 void LevelScene::AllWavesEnd()
 {
+	if (gameOver)return;
+	gameOver = 1;
 	auto accomplished = ui::Button::create("Accomplished/Win.png");
+	Director::getInstance()->pause();
 	// 获取屏幕大小和原点
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -228,11 +238,37 @@ void LevelScene::AllWavesEnd()
 
 	auto home = ui::Button::create("Accomplished/home.png");
 	home->addClickEventListener([=](Ref* sender) {
+		Director::getInstance()->resume();
 		Director::getInstance()->popScene();
 		});
-	home->setPosition(center - Vec2(0, 300));
+	home->setPosition(center - Vec2(0, 200));
 	addChild(home,10001);
 
+}
+
+void LevelScene::lose()
+{
+	if (gameOver)return;
+	gameOver = 1;
+	auto fail = ui::Button::create("Accomplished/fail.png");
+	Director::getInstance()->pause();
+	// 获取屏幕大小和原点
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	Vec2 center = Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height / 2);
+	fail->setPosition(center + Vec2(28, 28));
+
+	addChild(fail, 10000);
+
+	_eventDispatcher->removeEventListener(this->touchListener);
+
+	auto home = ui::Button::create("Accomplished/home.png");
+	home->addClickEventListener([=](Ref* sender) {
+		Director::getInstance()->resume();
+		Director::getInstance()->popScene();
+		});
+	home->setPosition(center - Vec2(0, 200));
+	addChild(home, 10001);
 }
 
 const std::vector<cocos2d::Vec2>& LevelScene::getCheckPoints() const
@@ -289,7 +325,7 @@ void LevelScene::gotoNextWave()
 				scheduleOnce(
 					[&](float dt) {
 						gotoNextWave();
-					}, 1.0f, "start next wave");
+					}, 5.0f, "start next wave");
 				cnt = 0;
 				++currentWave;
 				return;
@@ -298,7 +334,7 @@ void LevelScene::gotoNextWave()
 			monster->setPosition(checkPoints[0]);
 			monsters.pushBack(monster);
 			addChild(monster, 2);
-		}, 0.1f, "spawn wave");
+		}, 0.5f, "spawn wave");
 }
 
 Carrot* LevelScene::getCarrot() const
@@ -321,6 +357,7 @@ void LevelScene::buildMenu(cocos2d::Vec2 pos)
 	CCLOG("%d\n", getMoney());
 	if (hasMenu == 1)
 	{
+		SFX::towerDeselect();
 		menuClear();
 		hasMenu = 0;
 		return;
@@ -328,6 +365,7 @@ void LevelScene::buildMenu(cocos2d::Vec2 pos)
 	int x = pos.x / 80, y = pos.y / 80;
 	Vec2 girdPos = Vec2(x * 80 + 40, y * 80 + 40);
 	Vec2 offSet = Vec2(0, 0);
+	SFX::towerSelect();
 	selectBox->setPosition(girdPos);
 	int money = getMoney();
 	bool canBuild[3] = { money >= 100,money >= 120,money >= 160 };
@@ -358,6 +396,7 @@ void LevelScene::buildMenu(cocos2d::Vec2 pos)
 			addChild(bottle);
 			towerStates[y][x] = TowerInfo(0, 1, bottle);
 			CCLOG("%d", consumeMoney(100));
+			SFX::towerBulid();
 			regionStates[y][x] = TOWER;
 		}
 		menuClear();
@@ -368,11 +407,12 @@ void LevelScene::buildMenu(cocos2d::Vec2 pos)
 		if (canBuild[1])
 		{
 			//  TODO  ShitTower replace bottle
-			auto bottle = TowerBottle::create();
-			bottle->setPosition(girdPos);
-			addChild(bottle);
-			towerStates[y][x] = TowerInfo(0, 1, bottle);
+			auto shit = TowerShit::create();
+			shit->setPosition(girdPos);
+			addChild(shit);
+			towerStates[y][x] = TowerInfo(1, 1, shit);
 			CCLOG("%d", consumeMoney(120));
+			SFX::towerBulid();
 			regionStates[y][x] = TOWER;
 		}
 		menuClear();
@@ -397,11 +437,10 @@ void LevelScene::buildMenu(cocos2d::Vec2 pos)
 
 void LevelScene::upgradeMenu(cocos2d::Vec2 pos)
 {
-
-
 	CCLOG("%d\n", getMoney());
 	if (hasMenu == 1)
 	{
+		SFX::towerDeselect();
 		menuClear();
 		hasMenu = 0;
 		return;
@@ -409,6 +448,7 @@ void LevelScene::upgradeMenu(cocos2d::Vec2 pos)
 	int x = pos.x / 80, y = pos.y / 80;
 	Vec2 girdPos = Vec2(x * 80 + 40, y * 80 + 40);
 	Vec2 offSet = Vec2(0, 0);
+	SFX::towerSelect();
 	selectBox->setPosition(girdPos);
 	int money = getMoney();
 
@@ -442,6 +482,7 @@ void LevelScene::upgradeMenu(cocos2d::Vec2 pos)
 		{
 			towerHere._ptrTower->levelup();
 			CCLOG("%d", consumeMoney(upgradeCost[towerHere._what][towerHere._level]));
+			SFX::towerUpdata();
 			towerHere._level++;
 		}
 		menuClear();
@@ -453,6 +494,7 @@ void LevelScene::upgradeMenu(cocos2d::Vec2 pos)
 		CCLOG("%d", consumeMoney(-80));
 		towerHere._level = 0; towerHere._ptrTower = nullptr; towerHere._what = -1;
 		regionStates[y][x] = EMPTY;
+		SFX::towerSell();
 		menuClear();
 		hasMenu = 0;
 		});
