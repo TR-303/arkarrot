@@ -24,7 +24,6 @@
 
 #include "AppDelegate.h"
 #include "StartMenuScene.h"
-#include "TestScene.h"
 #include "CSVDataManager.h"
 
 // #define USE_AUDIO_ENGINE 1
@@ -109,10 +108,12 @@ bool AppDelegate::applicationDidFinishLaunching() {
 
     register_all_packages();
 
-    CSVDataManager::getInstance()->loadTowerData("D:/Ddir/gitcode/arkarrot/Resources/towers.csv");
+    CSVDataManager::getInstance()->loadTowerData("Csvs/towers.csv");
+    CSVDataManager::getInstance()->loadMonsterData("Csvs/monsters.csv");
+    CSVDataManager::getInstance()->loadObjectData("Csvs/objects.csv");
+    CSVDataManager::getInstance()->loadLevelData("Csvs/levels.csv");
 
-    // create a scene. it's an autorelease object
-    auto scene = TestScene::create();
+    auto scene = StartMenuScene::create();
 
     // run
     director->runWithScene(scene);

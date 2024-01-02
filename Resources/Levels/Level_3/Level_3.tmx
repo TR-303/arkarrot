@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.10" tiledversion="1.10.2" orientation="orthogonal" renderorder="left-down" width="12" height="8" tilewidth="80" tileheight="80" infinite="0" nextlayerid="4" nextobjectid="23">
+ <tileset firstgid="1" source="../nothing.tsx"/>
+ <objectgroup id="2" name="objects">
+  <object id="1" name="cloud01" type="object1x1" x="0" y="80" width="80" height="80"/>
+  <object id="2" name="cloud01" type="object1x1" x="0" y="240" width="80" height="80"/>
+  <object id="3" name="cloud07" type="object2x2" x="320" y="240" width="160" height="160"/>
+  <object id="4" name="cloud06" type="object2x2" x="80" y="320" width="160" height="160"/>
+  <object id="5" name="cloud03" type="object1x1" x="560" y="320" width="80" height="80"/>
+  <object id="6" name="cloud04" type="object1x2" x="640" y="320" width="160" height="80"/>
+  <object id="7" name="cloud02" type="object1x1" x="800" y="320" width="80" height="80"/>
+  <object id="8" name="cloud05" type="object2x2" x="560" y="80" width="160" height="160"/>
+  <object id="9" name="cloud01" type="object1x1" x="560" y="480" width="80" height="80"/>
+  <object id="10" name="cloud01" type="object1x1" x="720" y="480" width="80" height="80"/>
+ </objectgroup>
+ <objectgroup id="3" name="checkpoints">
+  <object id="11" name="0" x="800" y="160">
+   <point/>
+  </object>
+  <object id="12" name="1" x="800" y="240">
+   <point/>
+  </object>
+  <object id="13" name="2" x="480" y="240">
+   <point/>
+  </object>
+  <object id="14" name="3" x="480" y="160">
+   <point/>
+  </object>
+  <object id="15" name="4" x="80" y="160">
+   <point/>
+  </object>
+  <object id="16" name="5" x="80" y="240">
+   <point/>
+  </object>
+  <object id="17" name="6" x="240" y="240">
+   <point/>
+  </object>
+  <object id="19" name="7" x="240" y="480">
+   <point/>
+  </object>
+  <object id="20" name="8" x="400" y="480">
+   <point/>
+  </object>
+  <object id="21" name="9" x="400" y="400">
+   <point/>
+  </object>
+  <object id="22" name="10" x="800" y="400">
+   <point/>
+  </object>
+ </objectgroup>
+</map>

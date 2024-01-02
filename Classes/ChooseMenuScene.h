@@ -4,26 +4,28 @@
 #include<string>
 
 class ChooseMenuScene : public cocos2d::Scene {
-public:
-    static cocos2d::Scene* createScene();
-    virtual bool init() override;
-
-    // 按钮点击事件处理器
-    void changeImage(cocos2d::Ref* sender);
-    void buttonMap1Clicked(cocos2d::Ref* sender);
-    void buttonMap2Clicked(cocos2d::Ref* sender);
-    void buttonMap3Clicked(cocos2d::Ref* sender);
-    void buttonLastMapClicked(cocos2d::Ref* sender);
-    void buttonNextMapClicked(cocos2d::Ref* sender);
-    void buttonMainMenuClicked(cocos2d::Ref* sender);
-
-    // implement the "static create()" method manually
-    CREATE_FUNC(ChooseMenuScene);
-
 private:
-    cocos2d::Sprite* imageSprite; // 用于显示图片的精灵
-    cocos2d::Sprite* secondImageSprite; // 用于显示第二张图片的精灵
-    int currentImageIndex; // 当前图片索引
-    std::vector<std::string> imagePaths; // 图片路径数组
-
+    virtual bool init() override;
+    /*
+    * @brief 转到上一关的回调函数
+    */
+    void buttonLastMapClicked(cocos2d::Ref* sender);
+    /*
+    * @brief 转到下一关的回调函数
+    */
+    void buttonNextMapClicked(cocos2d::Ref* sender);
+    /*
+    * @brief 回到主菜单的回调函数
+    */
+    void buttonMainMenuClicked(cocos2d::Ref* sender);
+    /*
+    * @brief 开始游戏的回调函数
+    * @todo 补全游戏场景
+    */
+    void buttonStartClicked(cocos2d::Ref* sender);
+    //当前展示的关卡编号
+    int currentStageIndex;
+    std::vector<cocos2d::Sprite*> stageSprites;
+public:
+    CREATE_FUNC(ChooseMenuScene);
 };

@@ -19,6 +19,7 @@ void TowerStar::generateBullet()
     bullet->setPosition(getPosition());
     LevelScene::getInstance()->addChild(bullet);
     Sprite::setSpriteFrame(animationFrames.front());
+    SFX::starFire();
 }
 
 bool TowerStar::aim(float dt)

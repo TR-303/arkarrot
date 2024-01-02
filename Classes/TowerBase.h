@@ -4,6 +4,7 @@
 #include "VisibleBase.h"
 #include "VictimBase.h"
 #include "Monster.h"
+#include "SoundFx.h"
 
 class LevelScene;
 /*

@@ -6,10 +6,9 @@
 class StartMenuScene :public cocos2d::Scene {
 public:
 	bool init()override;
-
 	CREATE_FUNC(StartMenuScene);
 	/*
-	* @brief 锟斤拷始锟斤拷钮锟截碉拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷为锟斤拷锟斤拷选锟截斤拷锟斤拷
+	* @brief 开始按钮回调函数，功能为进入选关界面
 	*/
 	void StartMenuScene::goToChooseMenuScene(cocos2d::Ref* sender);
 };

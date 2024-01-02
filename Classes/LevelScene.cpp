@@ -406,7 +406,6 @@ void LevelScene::buildMenu(cocos2d::Vec2 pos)
 	buildButtonShit->addClickEventListener([=](cocos2d::Ref* sender) {
 		if (canBuild[1])
 		{
-			//  TODO  ShitTower replace bottle
 			auto shit = TowerShit::create();
 			shit->setPosition(girdPos);
 			addChild(shit);
