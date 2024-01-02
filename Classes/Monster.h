@@ -14,6 +14,7 @@ public:
             delete pRet; pRet = nullptr; return nullptr;
         }
     };
+    void debuff(float duration)override;
     float distance;
 private:
     bool init(const string& name, std::vector<cocos2d::Vec2>& checkpoints);
