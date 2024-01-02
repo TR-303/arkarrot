@@ -32,6 +32,10 @@ void VictimBase::updateLifeBar()
     lifeBarFg->setPercentage(100 - percentage);
 }
 
+void VictimBase::debuff(float duration)
+{
+}
+
 void VictimBase::onExit()
 {
     Node::onExit();

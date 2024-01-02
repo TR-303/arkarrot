@@ -14,6 +14,8 @@ public:
 	bool getHit(int damage);
 	void updateLifeBar();
 
+	virtual void debuff(float duration);
+
 	cocos2d::ProgressTimer* lifeBarFg;
 	int maxLP;
 	int visibleLP;
