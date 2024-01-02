@@ -82,7 +82,7 @@ public:
 	//关于场景金币
 private:
 	int money;
-	cocos2d::Label* moneyLabel;  // 用于显示金币数量的Label
+
 public:
 	void updateMoneyLabel(float delta);
 	int getMoney()const;
@@ -93,14 +93,22 @@ public:
 	void addMonsy(int reward);
 
 
+	//关于菜单顶栏
+private:
+	cocos2d::Label* moneyLabel;  // 用于显示金币数量的Label
+	cocos2d::Label* waveLabel;  // 用于显示波次的Label
+	cocos2d::Sprite* banner;  //顶栏的背景底纹
+
+
+
 	//关于出怪时间轴
 private:
 	int currentWave;
-	cocos2d::Label* waveLabel;  // 用于显示波次的Label
 	void updateWaveLabel(float delta);
 	void AllWavesEnd();
-	void lose();
+	bool gameOver = 0;
 public:
+	void lose();
 	int getCurrentWave()const;
 	/*
 	* @brief 触发下一波怪物
